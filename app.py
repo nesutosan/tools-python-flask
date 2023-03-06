@@ -1,6 +1,8 @@
-from flask import Flask, request, send_file, render_template
+from flask import Flask, request, send_file, render_template, redirect, url_for
 from PyPDF2 import PdfMerger, PdfReader, PdfWriter
 from io import BytesIO
+import base64
+import qrcode
 app = Flask(__name__)
 
 # Define a route for the index page
@@ -24,6 +26,11 @@ def pdf_merge():
 @app.route('/pdf/split', methods=['GET'])
 def pdf_split():
     return render_template('split.html')
+
+
+@app.route('/qrcode', methods=['GET'])
+def gen_qrcode():
+    return render_template('qrcode.html')
 
 # Define a route for the PDF merging function
 
@@ -75,19 +82,27 @@ def split_pdf():
         # Return the split PDF as a downloadable file
         return send_file(output_file, download_name=filename, as_attachment=True)
 
-# Error handling function for Internal Server Error (500)
+# Define a route for generate QRCODE
 
 
-@app.errorhandler(500)
-def internal_server_error(error):
-    return render_template('error.html'), 500
+@app.route('/generate_qrcode', methods=['POST'])
+def generate_qrcode():
+    # Get the text to encode from the form
+    text = request.form.get('text-input')
+    # Generate the QR code as a PNG image
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr.add_data(text)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color='black', back_color='white')
+    # Store the image in a BytesIO buffer so that it can be sent as a response
+    img_io = BytesIO()
+    img.save(img_io, 'PNG')
+    img_io.seek(0)
+    # Encode image bytes as base64 string
+    encoded_img = base64.b64encode(img_io.read()).decode()
+    # Render the image in the HTML template
+    return render_template('qrcode.html', qr_image=encoded_img)
 
-# Route that raises an Internal Server Error (500)
-
-
-@app.route('/raise_error')
-def raise_error():
-    raise Exception('Internal Server Error')
 
 # Error handling function for 404 Page Not Found
 
@@ -102,6 +117,20 @@ def page_not_found(error):
 @app.route('/not_found')
 def not_found():
     return 'This page does not exist', 404
+
+# Custom error handling function for all error codes
+
+
+@app.errorhandler(Exception)
+def handle_error(error):
+    return redirect(url_for('custom_error_page')), 302
+
+# Custom error page to redirect to
+
+
+@app.route('/custom_error_page')
+def custom_error_page():
+    return render_template('error.html')
 
 
 if __name__ == '__main__':

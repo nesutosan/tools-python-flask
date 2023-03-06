@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Generate QR Code{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <div id="qrcode">
+        <h1 class="display-4">Generate QR Code</h1>
+        <p class="lead">สำหรับใช้ในแปลงข้อความให้เป็น QR Code</p>
+        <hr class="my-4">
+        <form action="{{ url_for('generate_qrcode') }}" method="POST">
+            <div class="form-group">
+                <label for="text-input">กรุณากรอก URL หรือข้อความ:</label>
+                <br>
+                <input type="text" class="form-control" name="text-input">
+                <hr class="my-4">
+                <button class="btn btn-info" type="submit">สร้าง QR Code</button>
+            </div>
+        </form>
+        {% if qr_image %}
+            <h2>QR Code</h2>
+            <img src="data:image/png;base64, {{ qr_image }}" alt="QR Code">
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
