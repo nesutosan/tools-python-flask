@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}PDF Split{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <div id="split">
+        <h1 class="display-4">Split PDF File</h1>
+        <p class="lead">สำหรับใช้แยกไฟล์ PDF สามารถเลือกหน้าที่ต้องการแยกเก็บไว้ได้ โดยการเลือกไฟล์ pdf และใส่เลขหน้าที่ต้องการแยกเก็บไว้</p>
+        <hr class="my-4">
+        <form action="{{ url_for('split_pdf') }}" method="POST" enctype="multipart/form-data">
+            <input type="file" name="pdf_file" accept=".pdf">
+            <br>
+            <br>
+            <label for="page_ranges">หน้าเริ่มต้น (ตัวอย่าง 1):</label>
+            <input type="number" min="0" step="1" id="page_ranges" name="page_start">
+            <br>
+            <label for="page_ranges">หน้าสุดท้าย (ตัวอย่าง 5):</label>
+            <input type="number" min="0" step="1" id="page_ranges" name="page_end">
+            <hr class="my-4">
+            <button class="btn btn-info" type="submit">Split PDF File</button>
+        </form>
+    </div> 
+</div>
+
+{% endblock %}

@@ -1,0 +1,6 @@
+# created by virtualenv automatically
+Test-Sets/*
+Lib/*
+Scripts/*
+__pycache__/*
+pyvenv.cfg

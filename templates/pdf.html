@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}PDF Toolkit{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">PDF Toolkit</h1>
+        <p class="lead">A simple tool to merge and split PDF files.</p>
+        <hr class="my-4">
+        <p>กรุณาเลือกเครื่องมือที่ต้องการ</p>
+        <div class="container">
+            <div class="row mx-auto">
+                    <a class="btn btn-dark btn-lg btn-block" href="/pdf/merge" role="button">รวมไฟล์ PDF</a>
+                    <a class="btn btn-dark btn-lg btn-block" href="/pdf/split" role="button">แยกไฟล์ PDF</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

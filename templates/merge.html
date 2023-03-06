@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Merge PDF{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <div id="merge">
+        <h1 class="display-4">Merge PDF Files</h1>
+        <p class="lead">สำหรับใช้ในการรวมไฟล์ PDF สามารถเลือกไฟล์ pdf หลายไฟล์ได้โดยการคลุมดำไฟล์ pdf ทั้งหมด</p>
+        <hr class="my-4">
+        <form action="{{ url_for('merge_pdf') }}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>กรุณาเลือกไฟล์ที่ต้องการรวม:</label>
+                <br>
+                <input type="file" class="form-control-file" name="pdf_files" accept=".pdf" multiple>
+                <hr class="my-4">
+                <button class="btn btn-info" type="submit">รวมไฟล์ PDF</button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+{% endblock %}
