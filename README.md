@@ -64,11 +64,13 @@ tools-python-flask/
 │   │   └── bootstrap.min.js
 │   └── style.css
 └── templates/
+    ├── 404.html
     ├── base.html
     ├── error.html
     ├── index.html
     ├── merge.html
     ├── pdf.html
+    ├── qrcode.html
     └── split.html
 ```
 
