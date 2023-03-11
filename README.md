@@ -1,3 +1,6 @@
+# Repository นี้ เป็นส่วนหนึ่งที่มาจากบทความใน Medium ตาม Link ด้านล่างนี้
+> https://medium.com/@nesutosan/chatgpt-คุยกับน้อนยังไงให้ได้งาน-bb58c13bbfa4
+
 # Toolkits
 
 This is a Flask application that provides various tools to enhance your experience.
