@@ -14,7 +14,7 @@ MarkupSafe==2.1.2
 numpy==1.23.0
 opencv-python==4.6.0.66
 pandas==1.4.3
-Pillow==9.2.0
+Pillow>=9.3.0
 pipenv==2022.8.19
 platformdirs==2.5.2
 pycodestyle==2.8.0
